@@ -7,7 +7,7 @@
  * in the user guide at https://docs.gradle.org/4.10.2/userguide/multi_project_builds.html
  */
 
-rootProject.name = 'egov01'
+rootProject.name = 'egov_lesson'
 include 'lesson01A'
 include 'lesson01B'
 include 'lesson01C'
