@@ -1,0 +1,23 @@
+ext {
+	repo = [
+		datanucleus : 'http://www.datanucleus.org/downloads/maven2/'
+	]
+
+	versions = [
+		gradle 	: '4.10',
+		log4j	: '1.2.17',
+		ojdbc6 	: '11.2.0.3',
+		spring 	: '5.1.3.RELEASE',
+		
+		junit	: '4.12'
+	]
+	
+	dep = [
+		log4j			: "log4j:log4j:$versions.log4j",
+		ojdbc6			: "oracle:ojdbc6:$versions.ojdbc6",
+		spring			: 	[
+							"org.springframework:spring-context:$versions.spring"
+							],
+		junit			: "junit:junit:$versions.junit"
+	]
+}

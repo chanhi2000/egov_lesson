@@ -1,0 +1,27 @@
+apply from: "dependencies.gradle"
+
+allprojects {
+	buildscript {
+		repositories {
+		
+		}
+		dependencies {
+		
+		}
+	}
+	
+	repositories {
+		jcenter()
+		mavenCentral()
+		maven { url "http://www.datanucleus.org/downloads/maven2/" }
+	}
+	
+	task wrapper(type: Wrapper) {
+		gradleVersion = "$versions.gradle";
+	}
+	
+	tasks.withType(JavaCompile) {
+		options.encoding = 'UTF-8'
+	}
+	
+}

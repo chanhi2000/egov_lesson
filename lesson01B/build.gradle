@@ -1,0 +1,31 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+	maven { url "http://www.datanucleus.org/downloads/maven2/" }
+}
+
+compileJava   {
+	sourceCompatibility = JavaVersion.VERSION_1_7
+	targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+sourceSets {
+	main {
+		java.srcDirs += ["src/main/java"]
+	}
+	test {
+		java.srcDirs += ["src/test/java"]
+	}
+}
+
+task(runMain, dependsOn: "classes", type: JavaExec) {
+	main = 'com.hr.UserDao'
+	classpath = sourceSets.main.runtimeClasspath
+}
+
+dependencies {
+	implementation dep.ojdbc6
+	implementation dep.log4j
+    testImplementation dep.junit
+}
