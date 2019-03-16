@@ -19,6 +19,9 @@ ext {
 							"org.springframework:spring-context:$versions.spring",
 							"org.springframework:spring-jdbc:$versions.spring"
 							],
+		springTest		: 	[
+		        			"org.springframework:spring-test:$versions.spring"
+							],
 		junit			: "junit:junit:$versions.junit"
 	]
 }

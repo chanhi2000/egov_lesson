@@ -102,6 +102,39 @@ public class UserDao {
 		return user;
 	}
 
+	public int getCount(String id) throws SQLException {
+		Connection connection = dataSource.getConnection();
+		LOG.debug("connection:"+connection);
+		int cnt = 0;
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT 				\n");
+		sb.append("	COUNT(*) cnt		\n");
+		sb.append("FROM				 	\n");
+		sb.append("	users			 	\n");
+		sb.append("WHERE u_id LIKE ? 	\n");
+		LOG.debug("==============================");
+		LOG.debug("Query: \n" + sb.toString());
+		LOG.debug("==============================");
+
+		PreparedStatement ps = connection.prepareStatement(sb.toString());
+		ps.setString(1, "%"+id+"%");
+
+		ResultSet rs = ps.executeQuery();
+		User user = null;
+		if(rs.next()) {
+			cnt = rs.getInt("cnt");
+		}
+		LOG.debug("==============================");
+		LOG.debug("cnt:"+cnt);
+		LOG.debug("==============================");
+		rs.close();
+		ps.close();
+		connection.close();
+
+		return cnt;
+	}
+
 	public int delete(User user) throws ClassNotFoundException, SQLException {
 		// type "sqlplus SIST_HR/SIST1224@211.238.142.102:1521/orcl" on cmd
 		// to validate the database exists.

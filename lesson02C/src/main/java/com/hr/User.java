@@ -4,7 +4,15 @@ public class User {
 	private String u_id;
 	private String name;
 	private String password;
-	
+
+	public User(String u_id, String name, String password) {
+		super();
+		this.u_id = u_id;
+		this.name = name;
+		this.password = password;
+	}
+	public User() {}
+
 	@Override
 	public String toString() {
 		return "User [u_id=" + u_id + ", name=" + name + ", password=" + password + "]";
