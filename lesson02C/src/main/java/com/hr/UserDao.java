@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 public class UserDao {
@@ -85,12 +86,18 @@ public class UserDao {
 
 		ResultSet rs = ps.executeQuery();
 		User user = null;
+
+
+
 		if (rs.next()) {
 			user = new User();
 			user.setU_id(rs.getString(USER_ID));
 			user.setName(rs.getString(NAME));
 			user.setPassword(rs.getString(PASSWORD));
 		}
+
+		if (null == user) throw new NullPointerException();
+
 		LOG.debug("==============================");
 		LOG.debug("User: \n" + user.toString());
 		LOG.debug("==============================");
