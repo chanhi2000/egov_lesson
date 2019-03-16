@@ -16,7 +16,8 @@ ext {
 		log4j			: "log4j:log4j:$versions.log4j",
 		ojdbc6			: "oracle:ojdbc6:$versions.ojdbc6",
 		spring			: 	[
-							"org.springframework:spring-context:$versions.spring"
+							"org.springframework:spring-context:$versions.spring",
+							"org.springframework:spring-jdbc:$versions.spring"
 							],
 		junit			: "junit:junit:$versions.junit"
 	]
