@@ -183,17 +183,11 @@ public class UserDao {
 		} finally {
 			// Connection ����
 			if (null != ps)
-				try {
-					ps.close();
-				} catch (SQLException e) {
-
-				}
+				try { ps.close(); }
+				catch (SQLException e) { }
 			if (null != connection)
-				try {
-					connection.close();
-				} catch (SQLException e) {
-
-				}
+				try { connection.close(); }
+				catch (SQLException e) { }
 		}
 		return flag;
 	}
