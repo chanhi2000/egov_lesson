@@ -41,7 +41,8 @@ dependencies {
 		exclude group: 'com.sun.jmx', module: 'jmxri'
 	}
 	implementation dep.javaxInject
-	providedCompile  dep.javaxServlet // provided scope
+	providedCompile  dep.javaxServlet
+	providedCompile dep.javaxEL
 	implementation dep.javaxServletJstl
 	implementation dep.aspectj
 	testImplementation dep.springTest
@@ -49,13 +50,14 @@ dependencies {
 }
 
 tomcatRunWar.contextPath = '/'
-tomcatRun.contextPath = '/sist'
+tomcatRun.contextPath = '/'
 
 tomcat {
 	httpPort  8089
 	httpsPort 8079
 	jasper {
-
+		validateTld = true
+		validateXml = true
 	}
 }
 
