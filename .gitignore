@@ -16,8 +16,13 @@ build/
 
 # Gradle 
 .gradle/
+<<<<<<< HEAD
 gradle/
 gradlew.*
 gradlew
+=======
+gradlew
+gradlew.*
+>>>>>>> lesson01
 
 *.log
