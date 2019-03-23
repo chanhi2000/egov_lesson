@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd">
+
+	<!-- target -->
+	<bean id="memberSvcImpl" class="com.hr.MemberSvcImpl">
+
+	</bean>
+
+	<!-- Advice -->
+	<bean id="memberAop" class="com.hr.MemberAop">
+
+	</bean>
+
+	<!-- PointCut -->
+	<bean id="memberPointCut" class="com.hr.NameMatcherClassMethodPointCut">
+		<property name="mappedClassName" value="*SvcImpl"/>
+
+		<!-- Method -->
+		<property name="mappedName" value="do_*"/>
+	</bean>
+
+	<!-- Advisor(Advice_PointCut)-->
+	<bean id="writeAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="memberAop"/>
+		<property name="pattern" value=".*do_*.*"/>
+	</bean>
+
+	<!-- ProxyFactoryBean -->
+	<bean id="memberProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="memberSvcImpl"/>
+		<property name="interceptorNames">
+			<list>
+				<value>writeAdvisor</value>
+			</list>
+		</property>
+	</bean>
+</beans>
