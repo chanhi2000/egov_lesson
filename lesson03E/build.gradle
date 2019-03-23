@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'com.bmuschko.tomcat'
 
 repositories {
     mavenCentral()
@@ -24,24 +25,49 @@ compileJava   {
 	options.failOnError = false
 }
 
-task(runMain, dependsOn: "classes", type: JavaExec) {
-	main = 'com.hr.UserDao'
-	classpath = sourceSets.main.runtimeClasspath
-}
-
 dependencies {
-	implementation dep.springContext
+	tomcat dep.tomcat
+	implementation(dep.springContext) {
+		exclude group: 'commons-logging', module: 'commons-logging'
+	}
 	implementation dep.spring
 	implementation dep.ojdbc6
-	implementation dep.log4j
+	implementation dep.slf4jBase
+	runtime dep.slf4j
+	runtime(dep.log4j) {
+		exclude group: 'javax.mail', module: 'mail'
+		exclude group: 'javax.jms', module: 'jms'
+		exclude group: 'com.sun.jdmk', module: 'jmxtools'
+		exclude group: 'com.sun.jmx', module: 'jmxri'
+	}
+	implementation dep.javaxInject
+	providedCompile  dep.javaxServlet // provided scope
+	implementation dep.javaxServletJstl
+	implementation dep.aspectj
 	testImplementation dep.springTest
     testImplementation dep.junit
+}
+
+tomcatRunWar.contextPath = '/'
+tomcatRun.contextPath = '/sist'
+
+tomcat {
+	httpPort  8089
+	httpsPort 8079
+	jasper {
+
+	}
 }
 
 eclipse {
 	classpath {
 		downloadJavadoc = true
     	downloadSources = true
+	}
+	wtp {
+		component {
+			contextPath = '/'
+		}
 	}
 }
 

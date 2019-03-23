@@ -30,6 +30,7 @@ task(runMain, dependsOn: "classes", type: JavaExec) {
 }
 
 dependencies {
+	implementation dep.springContext
 	implementation dep.spring
 	implementation dep.ojdbc6
 	implementation dep.log4j

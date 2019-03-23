@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- target -->
+	<bean id="dao" class="com.hr.MemberDao">
+
+	</bean>
+
+	<!-- Advice -->
+	<bean id="loggingAop" class="com.hr.LoggingAop"/>
+	<bean id="aroundAop" class="com.hr.AroundAop"/>
+
+	<!-- AOP Config -->
+	<aop:config>
+		<!-- Point Cut-->
+		<aop:pointcut id="allPointCut" expression="execution(* com.hr.MemberDao.*(..))"/>
+		<aop:aspect ref="loggingAop">
+			<!-- <aop:before method="logging" pointcut-ref="allPointCut"/> -->
+		</aop:aspect>
+		<aop:aspect ref="aroundAop">
+			<aop:around method="aroundLog" pointcut-ref="allPointCut"/>
+		</aop:aspect>
+	</aop:config>
+
+</beans>

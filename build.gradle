@@ -3,10 +3,10 @@ apply from: "dependencies.gradle"
 allprojects {
 	buildscript {
 		repositories {
-		
+			jcenter()
 		}
 		dependencies {
-		
+			classpath cp.tomcat
 		}
 	}
 	
@@ -17,7 +17,7 @@ allprojects {
 	}
 	
 	task wrapper(type: Wrapper) {
-		gradleVersion = "$versions.gradle";
+		gradleVersion = "$versions.gradle"
 	}
 	
 	tasks.withType(JavaCompile) {

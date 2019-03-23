@@ -24,16 +24,12 @@ compileJava   {
 	options.failOnError = false
 }
 
-task(runMain, dependsOn: "classes", type: JavaExec) {
-	main = 'com.hr.UserDao'
-	classpath = sourceSets.main.runtimeClasspath
-}
 
 dependencies {
-	implementation dep.springContext
 	implementation dep.spring
 	implementation dep.ojdbc6
 	implementation dep.log4j
+	implementation dep.aspectj
 	testImplementation dep.springTest
     testImplementation dep.junit
 }
