@@ -1,12 +1,3 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-
-repositories {
-    mavenCentral()
-	maven { url "http://www.datanucleus.org/downloads/maven2/" }
-}
-
 sourceSets {
 	main {
 		java.srcDirs += ["src/main/java"]
@@ -15,13 +6,6 @@ sourceSets {
 	test {
 		java.srcDirs += ["src/test/java"]
 	}
-}
-
-compileJava   {
-	sourceCompatibility = JavaVersion.VERSION_1_7
-	targetCompatibility = JavaVersion.VERSION_1_7
-	options.incremental = true
-	options.failOnError = false
 }
 
 task(runMain, dependsOn: "classes", type: JavaExec) {
@@ -33,18 +17,4 @@ dependencies {
 	implementation dep.ojdbc6
 	implementation dep.log4j
     testImplementation dep.junit
-}
-
-eclipse {
-	classpath {
-		downloadJavadoc = true
-    	downloadSources = true
-	}
-}
-
-idea {
-	module {
-		downloadJavadoc = true
-    	downloadSources = true
-	}
 }
