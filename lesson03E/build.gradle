@@ -1,12 +1,5 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'com.bmuschko.tomcat'
-
-repositories {
-    mavenCentral()
-	maven { url "http://www.datanucleus.org/downloads/maven2/" }
-}
+apply plugin: 'eclipse'
 
 sourceSets {
 	main {
@@ -16,13 +9,6 @@ sourceSets {
 	test {
 		java.srcDirs += ["src/test/java"]
 	}
-}
-
-compileJava   {
-	sourceCompatibility = JavaVersion.VERSION_1_7
-	targetCompatibility = JavaVersion.VERSION_1_7
-	options.incremental = true
-	options.failOnError = false
 }
 
 dependencies {
@@ -62,20 +48,9 @@ tomcat {
 }
 
 eclipse {
-	classpath {
-		downloadJavadoc = true
-    	downloadSources = true
-	}
 	wtp {
 		component {
 			contextPath = '/'
 		}
-	}
-}
-
-idea {
-	module {
-		downloadJavadoc = true
-    	downloadSources = true
 	}
 }
