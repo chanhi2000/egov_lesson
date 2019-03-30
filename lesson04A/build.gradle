@@ -14,10 +14,11 @@ sourceSets {
 
 dependencies {
 	tomcat dep.tomcat
-	implementation(dep.springContext) {
+	
+	implementation(dep.egovMvc) {
 		exclude group: 'commons-logging', module: 'commons-logging'
 	}
-	implementation dep.spring
+	implementation dep.egov
 	implementation dep.ojdbc6
 	implementation dep.slf4jBase
 	runtime dep.slf4j
@@ -32,6 +33,7 @@ dependencies {
 	providedCompile dep.javaxEL
 	implementation dep.javaxServletJstl
 	implementation dep.aspectj
+	implementation dep.antlr
 	testImplementation dep.springTest
     testImplementation dep.junit
 }

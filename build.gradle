@@ -17,7 +17,9 @@ allprojects {
 	repositories {
 		jcenter()
 		mavenCentral()
-		maven { url "http://www.datanucleus.org/downloads/maven2/" }
+		maven { url repo.datanucleus }
+		maven { url repo.egov }
+		maven { url repo.egov2 }
 	}
 	
 	compileJava   {

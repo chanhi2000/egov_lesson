@@ -1,5 +1,7 @@
 ext {
 	repo = [
+		egov : 'http://www.egovframe.go.kr/maven/',
+		egov2 : 'http://maven.egovframe.kr:8080/maven/',
 		datanucleus : 'http://www.datanucleus.org/downloads/maven2/'
 	]
 
@@ -13,6 +15,7 @@ ext {
 		slf4j	: '1.6.6',
 		ojdbc6 	: '11.2.0.3',
 		spring 	: '5.1.3.RELEASE',
+		egov : '3.7.0',
 		aspectj : '1.9.2',
 		inject : '1',
 
@@ -20,7 +23,10 @@ ext {
 		servletJsp : '2.1',
 		servletJstl : '1.2',
 
+
+		hsqldb : '2.3.2',
 		el : "1.0",
+		antlr : '3.5',
 
 		taglib : "1.2.5",
 		
@@ -50,6 +56,12 @@ ext {
 							"org.springframework:spring-webmvc:$versions.spring",
 							"org.springframework:spring-jdbc:$versions.spring"
 							],
+		egovMvc			: 	"egovframework.rte:egovframework.rte.ptl.mvc:$versions.egov",
+		egov 			: 	[
+							"egovframework.rte:egovframework.rte.psl.dataaccess:$versions.egov",
+							"egovframework.rte:egovframework.rte.fdl.idgnr:$versions.egov",
+							"egovframework.rte:egovframework.rte.fdl.property:$versions.egov"
+							],
 		aspectj			: 	[
 							"org.aspectj:aspectjrt:$versions.aspectj",
 							"org.aspectj:aspectjweaver:$versions.aspectj",
@@ -66,6 +78,7 @@ ext {
 							"javax.servlet:servlet-api:$versions.servlet",
 							],
 		javaxEL			:	"javax.el:el-api:$versions.el",
+		antlr			: 	"org.antlr:antlr:$versions.antlr",
 		springTest		: 	[
 		        			"org.springframework:spring-test:$versions.spring"
 							],
