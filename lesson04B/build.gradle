@@ -21,6 +21,7 @@ dependencies {
 	}
 	implementation dep.egov
 	implementation dep.ojdbc6
+	implementation dep.cDbcp
 	implementation dep.javaxInject
 	providedCompile  dep.javaxServlet
 	implementation dep.javaxServletJstl

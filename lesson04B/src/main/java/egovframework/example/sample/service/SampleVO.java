@@ -53,7 +53,6 @@ public class SampleVO extends SampleDefaultVO {
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -61,7 +60,6 @@ public class SampleVO extends SampleDefaultVO {
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -69,7 +67,6 @@ public class SampleVO extends SampleDefaultVO {
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -77,7 +74,6 @@ public class SampleVO extends SampleDefaultVO {
 	public String getUseYn() {
 		return useYn;
 	}
-
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
@@ -85,7 +81,6 @@ public class SampleVO extends SampleDefaultVO {
 	public String getRegUser() {
 		return regUser;
 	}
-
 	public void setRegUser(String regUser) {
 		this.regUser = regUser;
 	}

@@ -23,10 +23,11 @@ ext {
 		servletJsp : '2.1',
 		servletJstl : '1.2',
 
-
 		hsqldb : '2.3.2',
 		el : "1.0",
 		antlr : '3.5',
+			
+		cDbcp : "1.4",	
 
 		taglib : "1.2.5",
 		
@@ -80,6 +81,7 @@ ext {
 		javaxEL			:	"javax.el:el-api:$versions.el",
 		antlr			: 	"org.antlr:antlr:$versions.antlr",
 		hsqldb			: 	"org.hsqldb:hsqldb:$versions.hsqldb",
+		cDbcp			:	"commons-dbcp:commons-dbcp:$versions.cDbcp",	
 		springTest		: 	[
 		        			"org.springframework:spring-test:$versions.spring"
 							],
