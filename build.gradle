@@ -1,6 +1,10 @@
 apply from: "dependencies.gradle"
 
 allprojects {
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+	
 	buildscript {
 		repositories {
 		
@@ -15,6 +19,28 @@ allprojects {
 		mavenCentral()
 		maven { url "http://www.datanucleus.org/downloads/maven2/" }
 	}
+	
+	compileJava   {
+		sourceCompatibility = JavaVersion.VERSION_1_7
+		targetCompatibility = JavaVersion.VERSION_1_7
+		options.incremental = true
+		options.failOnError = false
+	}
+
+	eclipse {
+		classpath {
+			downloadJavadoc = true
+			downloadSources = true
+		}
+	}
+
+	idea {
+		module {
+			downloadJavadoc = true
+			downloadSources = true
+		}
+	}
+	
 }
 
 task wrapper(type: Wrapper) {
