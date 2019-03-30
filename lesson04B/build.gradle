@@ -21,20 +21,13 @@ dependencies {
 	}
 	implementation dep.egov
 	implementation dep.ojdbc6
-	implementation dep.slf4jBase
-	runtime dep.slf4j
-	runtime(dep.log4j) {
-		exclude group: 'javax.mail', module: 'mail'
-		exclude group: 'javax.jms', module: 'jms'
-		exclude group: 'com.sun.jdmk', module: 'jmxtools'
-		exclude group: 'com.sun.jmx', module: 'jmxri'
-	}
 	implementation dep.javaxInject
 	providedCompile  dep.javaxServlet
-	providedCompile dep.javaxEL
 	implementation dep.javaxServletJstl
+	providedCompile dep.javaxEL
 	implementation dep.aspectj
 	implementation dep.antlr
+	implementation dep.hsqldb
 	testImplementation dep.springTest
     testImplementation dep.junit
 }
@@ -45,6 +38,7 @@ tomcatRun.contextPath = '/'
 tomcat {
 	httpPort  8089
 	httpsPort 8079
+	ajpPort 8019
 	jasper {
 		validateTld = true
 		validateXml = true
