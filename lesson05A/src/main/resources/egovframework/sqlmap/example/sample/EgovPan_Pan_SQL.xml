@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Pan">
+    <typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+    <typeAlias  alias="panVo" type="egovframework.example.pan.service.PanVO"/>
+
+    <resultMap id="pan" class="panVo">
+        <result property="cmID" column="cm_id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="passwd"/>
+        <result property="useYn" column="use_yn"/>
+        <result property="levels" column="levels"/>
+        <result property="login" column="login"/>
+        <result property="recommend" column="recommend"/>
+        <result property="email" column="email"/>
+    </resultMap>
+
+    <insert id="panDAO.insertPan">
+        <![CDATA[
+			INSERT INTO HR_PAN
+			(           CM_ID
+			,           NAME
+			,           PASSWD
+			,           USE_YN
+	        ,           LEVELS
+	        ,           LOGIN
+	        ,           RECOMMEND
+	        ,           EMAIL
+	        ,           REG_DT)
+			VALUES (    #cmID#
+            ,           #name#
+            ,           #password#
+            ,           #useYn#
+            ,           #levels#
+            ,           #login#
+            ,           #recommend#
+            ,           #email#
+			,           SYSDATE)
+		]]>
+    </insert>
+
+    <select id="panDAO.selectPan" resultMap="pan">
+        <![CDATA[
+            SELECT  CM_ID, NAME, PASSWD, USE_YN, LEVELS, LOGIN, RECOMMEND, EMAIL
+            FROM    HR_PAN
+            WHERE   CM_ID=#cmID#
+        ]]>
+    </select>
+
+    <delete id="panDAO.deletePan">
+        <![CDATA[
+            DELETE FROM HR_PAN
+            WHERE CM_ID=#cmID#
+        ]]>
+    </delete>
+
+    <update id="panDAO.updatePan">
+        <![CDATA[
+            UPDATE  HR_PAN
+            SET     CM_ID=#cmID#
+            ,       NAME=#name#
+            ,       PASSWD=#password#
+            ,       USE_YN=#useYn#
+            ,       LEVELS=#levels#
+            ,       LOGIN=#login#
+            ,       RECOMMEND=#recommend#
+            ,       EMAIL=#email#
+            WHERE   CM_ID=#cmID#
+        ]]>
+    </update>
+
+    <select id="panDAO.selectPanListPaged"  parameterClass="searchVO" resultClass="egovMap">
+        SELECT  CM_ID, NAME, PASSWD, USE_YN, LEVELS, LOGIN, RECOMMEND, EMAIL,
+                TO_CHAR(REG_DT, 'yyyyMMdd') as REG_DT
+        FROM    (SELECT  a.*, rownum r__
+                 FROM    (SELECT  *
+                          FROM    HR_PAN
+                          WHERE 	1=1
+        <isEqual prepend="AND" property="searchCondition" compareValue="0">
+                          CM_ID LIKE '%' || #searchKeyword# || '%'
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+            NAME LIKE '%' || #searchKeyword# || '%'
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="2">
+            EMAIL LIKE '%' || #searchKeyword# || '%'
+        </isEqual>
+
+                          ORDER BY CM_ID DESC) a
+        <![CDATA[
+                 WHERE   rownum < ((#pageIndex# * #pageSize#) + 1 ))
+        WHERE   r__ >= (((#pageIndex#-1) * #pageSize#) + 1)
+        ]]>
+    </select>
+
+
+    <select id="panDAO.selectPanListTotCnt"  parameterClass="searchVO" resultClass="int">
+        SELECT  COUNT(*) TOTCNT
+        FROM    HR_PAN
+        WHERE 	1=1
+        <isEqual prepend="AND" property="searchCondition" compareValue="0">
+                          CM_ID LIKE '%' || #searchKeyword# || '%'
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="1">
+                          NAME LIKE '%' || #searchKeyword# || '%'
+        </isEqual>
+        <isEqual prepend="AND" property="searchCondition" compareValue="2">
+                          EMAIL LIKE '%' || #searchKeyword# || '%'
+        </isEqual>
+    </select>
+
+</sqlMap>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.pan.service.impl.PanMapper">
+
+    <resultMap id="pan" type="egovframework.example.pan.service.PanVO">
+        <result property="cmID" column="cm_id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="passwd"/>
+        <result property="useYn" column="use_yn"/>
+        <result property="levels" column="levels"/>
+        <result property="login" column="login"/>
+        <result property="recommend" column="recommend"/>
+        <result property="email" column="email"/>
+    </resultMap>
+
+    <insert id="insertPan" parameterType="PanVO">
+        INSERT INTO HR_PAN
+        (           CM_ID
+        ,           NAME
+        ,           PASSWD
+        ,           USE_YN
+        ,           LEVELS
+        ,           LOGIN
+        ,           RECOMMEND
+        ,           EMAIL)
+        VALUES
+        (           #{cmID}
+        ,           #{name}
+        ,           #{password}
+        ,           #{useYn}
+        ,           #{levels}
+        ,           #{login}
+        ,           #{recommend}
+        ,           #{email} )
+    </insert>
+
+    <update id="updatePan">
+        UPDATE  HR_PAN
+        SET     CM_ID=#{cmID}
+        ,       NAME=#{name}
+        ,       PASSWD=#{password}
+        ,       USE_YN=#{useYn}
+        ,       LEVELS=#{levels}
+        ,       LOGIN=#{login}
+        ,       RECOMMEND=#{recommand}
+        ,       EMAIL=#{email}
+        WHERE   CM_ID=#{cmID}
+    </update>
+
+    <delete id="deletePan">
+        DELETE  FROM SAMPLE
+        WHERE   ID=#{id}
+    </delete>
+
+    <select id="selectPan" resultMap="pan">
+        SELECT  CM_ID, NAME, PASSWD, USE_YN, LEVELS, LOGIN, RECOMMEND, EMAIL
+        FROM    HR_PAN
+        WHERE   CM_ID=#{cmID}
+    </select>
+
+    <select id="selectPanList" parameterType="PanVO" resultType="egovMap">
+        SELECT  ID, NAME, DESCRIPTION, USE_YN, REG_USER
+        FROM    SAMPLE
+        WHERE   1=1
+        <if test="searchKeyword != null and searchKeyword != ''">
+            <choose>
+                <when test="searchCondition == 0">
+                    AND	CM_ID LIKE '%' || #{searchKeyword} || '%'
+                </when>
+                <when test="searchCondition == 1">
+                    AND	NAME LIKE '%' || #{searchKeyword} || '%'
+                </when>
+            </choose>
+        </if>
+        ORDER BY ID ASC
+        LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+    </select>
+
+    <select id="selectSampleListTotCnt" parameterType="searchVO" resultType="int">
+
+        SELECT COUNT(*) totcnt
+        FROM HR_PAN
+        WHERE 1=1
+        <if test="searchKeyword != null and searchKeyword != ''">
+            <choose>
+                <when test="searchCondition == 0">
+                    AND CM_ID LIKE '%' || #{searchKeyword} || '%'
+                </when>
+                <when test="searchCondition == 1">
+                    AND	NAME LIKE '%' || #{searchKeyword} || '%'
+                </when>
+            </choose>
+        </if>
+    </select>
+
+</mapper>

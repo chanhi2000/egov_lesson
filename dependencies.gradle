@@ -30,8 +30,12 @@ ext {
 		cDbcp : "1.4",	
 
 		taglib : "1.2.5",
+
+		gson : '2.8.5',
+		jsonSimple : '1.1.1',
 		
-		junit	: '4.12'
+		junit	: '4.12',
+		mockito	: '1.10.19'
 	]
 
 	cp = [
@@ -81,10 +85,15 @@ ext {
 		javaxEL			:	"javax.el:el-api:$versions.el",
 		antlr			: 	"org.antlr:antlr:$versions.antlr",
 		hsqldb			: 	"org.hsqldb:hsqldb:$versions.hsqldb",
-		cDbcp			:	"commons-dbcp:commons-dbcp:$versions.cDbcp",	
+		cDbcp			:	"commons-dbcp:commons-dbcp:$versions.cDbcp",
+
+		json			:	["com.google.code.gson:gson:$versions.gson",
+							 "com.googlecode.json-simple:json-simple:$versions.jsonSimple"
+							],
 		springTest		: 	[
 		        			"org.springframework:spring-test:$versions.spring"
 							],
-		junit			: "junit:junit:$versions.junit"
+		junit			: "junit:junit:$versions.junit",
+		mockito			: "org.mockito:mockito-all:$versions.mockito"
 	]
 }
